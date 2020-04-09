@@ -27,7 +27,7 @@ export function processHeaders(headers: any, data: any): any{
 
   if (isPlainObject(data)) {
     if (headers && !headers['Content-Type']) {
-      headers['Content-Type'] = 'application/json;chaset=utf-8'
+      headers['Content-Type'] = 'application/json;charset=utf-8'
     }
   }
   return headers

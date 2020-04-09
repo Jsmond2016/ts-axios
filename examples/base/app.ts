@@ -75,6 +75,40 @@ import axios from '../../src/index'
 // })
 
 
+// axios({
+//   method: 'post',
+//   url: '/base/post',
+//   data: {
+//     a: 1,
+//     b: 2,
+//   }
+// })
+
+// axios({
+//   method: 'post',
+//   url: '/base/post',
+//   headers: {
+//     'content-type': 'applicaction/json',
+//     'Accept': 'application/json, text/plain, */*',
+//   },
+//   data: {
+//     a: 1,
+//     b: 2,
+//   }
+// })
+
+// const paramsString = 'q=URLUTILS.searchParams&topic=api'
+// const searchParams = new URLSearchParams(paramsString)
+// // URLSearchParams： 参考 https://developer.mozilla.org/zh-CN/docs/Web/API/URLSearchParams
+
+// // 当请求数据是普通对象，且没有配置 headers 的时候，浏览器会自动为其添加 content-type
+// axios({
+//   method: 'post',
+//   url: '/base/post',
+//   data: searchParams,
+// })
+
+// tslint:disable-next-line: no-floating-promises
 axios({
   method: 'post',
   url: '/base/post',
@@ -82,28 +116,19 @@ axios({
     a: 1,
     b: 2,
   }
+}).then(res => {
+  console.log(res)
 })
 
+// tslint:disable-next-line: no-floating-promises
 axios({
   method: 'post',
   url: '/base/post',
-  headers: {
-    'content-type': 'applicaction/json',
-    'Accept': 'application/json, text/plain, */*',
+  responseType: 'json',
+  data: {
+    a: 3,
+    b: 4,
   },
-  data: {
-    a: 1,
-    b: 2,
-  }
-})
-
-const paramsString = 'q=URLUTILS.searchParams&topic=api'
-const searchParams = new URLSearchParams(paramsString)
-// URLSearchParams： 参考 https://developer.mozilla.org/zh-CN/docs/Web/API/URLSearchParams
-
-// 当请求数据是普通对象，且没有配置 headers 的时候，浏览器会自动为其添加 content-type
-axios({
-  method: 'post',
-  url: '/base/post',
-  data: searchParams,
+}).then(res => {
+  console.log(res)
 })
