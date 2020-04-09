@@ -5,12 +5,12 @@
  * @Copyright: Copyright (c) 2018, Hand
  */
 
-import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from './types';
+import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from './types'
+import { parseHeaders } from './helpers/headers'
 
 export default function xhr(config: AxiosRequestConfig): AxiosPromise {
 
   return new Promise((resolve) => {
-
     const { data = null, url, method = 'get', headers, responseType } = config
 
     const request = new XMLHttpRequest()
@@ -24,8 +24,8 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
     request.onreadystatechange = function handleLoad() {
       if (request.readyState !== 4) return
 
-      const responseHeaders = request.getAllResponseHeaders()
-      const responseData = responseType !== 'text' ? request.response : request.responseText
+      const responseHeaders = parseHeaders(request.getAllResponseHeaders())
+      const responseData = responseType && responseType !== 'text' ? request.response : request.responseText
       const response: AxiosResponse = {
         data: responseData,
         status: request.status,
@@ -34,7 +34,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
         config,
         request,
       }
-
+      console.log('xhr', response);
       resolve(response)
     }
 
@@ -45,7 +45,6 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
         request.setRequestHeader(name, headers[name])
       }
     })
-
     request.send(data)
     })
   

@@ -115,7 +115,7 @@ axios({
   data: {
     a: 1,
     b: 2,
-  }
+  },
 }).then(res => {
   console.log(res)
 })
@@ -132,3 +132,4 @@ axios({
 }).then(res => {
   console.log(res)
 })
+

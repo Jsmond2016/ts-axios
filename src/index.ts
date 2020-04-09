@@ -4,16 +4,18 @@
  * @Author: HJ <jinhuang02@hand-china.com>
  * @Copyright: Copyright (c) 2018, Hand
  */
-import { AxiosRequestConfig, AxiosPromise } from './types'
+import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from './types'
 import xhr from './xhr'
 import { bulidURL } from './helpers/url'
-import { transformRequest } from './helpers/data'
+import { transformRequest, transformResponse } from './helpers/data'
 import { processHeaders } from './helpers/headers'
 
-
 function axios (config: AxiosRequestConfig): AxiosPromise {
+  console.log('config', config);
   processConfig(config)
-  return xhr(config)
+  return xhr(config).then(res => {
+    return transformResponseData(res)
+  })
 }
 
 function processConfig (config: AxiosRequestConfig): void {
@@ -33,7 +35,12 @@ function transformUrl (config: AxiosRequestConfig): string {
 }
 
 function transformRequestData(config: AxiosRequestConfig): any {
-  transformRequest(config.data)
+  return transformRequest(config.data)
+}
+
+function transformResponseData(res: AxiosResponse): AxiosResponse {
+  res.data = transformResponse(res.data)
+  return res
 }
 
 

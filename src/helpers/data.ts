@@ -15,3 +15,16 @@ export function transformRequest (data: any): any {
   return data
 }
 
+// 当相应数据为字符串时，转换成 json 对象
+export function transformResponse (data: any): any {
+  if (typeof data === 'string') {
+    try {
+      // 将 data 转换成 json 对象
+      data = JSON.parse(data)
+    } catch (e) {
+      // 表示响应数据不是字符串
+      console.log('响应数据不是字符串')
+    }
+  }
+}
+
