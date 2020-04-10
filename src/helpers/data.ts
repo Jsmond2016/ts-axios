@@ -26,5 +26,6 @@ export function transformResponse (data: any): any {
       console.log('响应数据不是字符串')
     }
   }
+  return data
 }
 

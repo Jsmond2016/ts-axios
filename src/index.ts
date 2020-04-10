@@ -11,7 +11,6 @@ import { transformRequest, transformResponse } from './helpers/data'
 import { processHeaders } from './helpers/headers'
 
 function axios (config: AxiosRequestConfig): AxiosPromise {
-  console.log('config', config);
   processConfig(config)
   return xhr(config).then(res => {
     return transformResponseData(res)
