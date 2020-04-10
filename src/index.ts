@@ -4,43 +4,8 @@
  * @Author: HJ <jinhuang02@hand-china.com>
  * @Copyright: Copyright (c) 2018, Hand
  */
-import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from './types'
-import xhr from './xhr'
-import { bulidURL } from './helpers/url'
-import { transformRequest, transformResponse } from './helpers/data'
-import { processHeaders } from './helpers/headers'
+import axios from './axios'
 
-function axios (config: AxiosRequestConfig): AxiosPromise {
-  processConfig(config)
-  return xhr(config).then(res => {
-    return transformResponseData(res)
-  })
-}
-
-function processConfig (config: AxiosRequestConfig): void {
-  config.url = transformUrl(config)
-  config.headers = transformHeaders(config)
-  config.data = transformRequestData(config)
-}
-
-function transformHeaders(config: AxiosRequestConfig): any {
-  const { headers = {}, data = {} } = config
-  return processHeaders(headers, data)
-}
-
-function transformUrl (config: AxiosRequestConfig): string {
-  const { url, params } = config
-  return bulidURL(url, params)
-}
-
-function transformRequestData(config: AxiosRequestConfig): any {
-  return transformRequest(config.data)
-}
-
-function transformResponseData(res: AxiosResponse): AxiosResponse {
-  res.data = transformResponse(res.data)
-  return res
-}
-
+export * from './types'
 
 export default axios
