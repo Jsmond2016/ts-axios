@@ -20,3 +20,13 @@ export function isPlainObject (val: any): val is Object {
   return toString.call(val) === '[object Object]'
 }
 
+// 将 from 的内容全部拷贝到 to 中
+// 联合类型, 因为是在前面加了 括号，需要使用分号区分
+export function extend<T, U>(to: T, from: U): T & U {
+  for (const key in from) {
+    ;(to as T & U)[key] = from[key] as any
+  }
+
+  return to as T & U
+}
+
