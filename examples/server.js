@@ -115,6 +115,16 @@ function registerExtendRouter() {
   router.head('/extend/head', function(req, res) {
     res.end()
   })
+  router.get('/extend/user', function(req, res) {
+    res.json({
+      code: 0,
+      message: 'ok',
+      result: {
+        name: 'jack',
+        age:18
+      }
+    })
+  })
 }
 
 
