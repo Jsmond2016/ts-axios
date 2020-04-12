@@ -21,8 +21,10 @@ export interface AxiosRequestConfig{
   params?: any,
   headers?: any,
   responseType?: XMLHttpRequestResponseType,
-  timeout?: number
-  [propName: string]: any
+  timeout?: number,
+  [propName: string]: any,
+  transformRequest?: AxiosTransformer | AxiosTransformer[],
+  transformResponse?: AxiosTransformer | AxiosTransformer[]
 }
 
 export interface AxiosResponse<T = any> {
@@ -92,4 +94,8 @@ export interface ResolvedFn<T> {
 // 返回的可能是错误，错误可能有多种，使用 any
 export interface RejectedFn {
   (error: any): any
+}
+
+export interface AxiosTransformer{
+  (data: any, headers: any): any
 }

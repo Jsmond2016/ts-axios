@@ -5,7 +5,9 @@
  * @Copyright: Copyright (c) 2018, Hand
  */
 
- import { AxiosRequestConfig} from './types'
+ import { AxiosRequestConfig } from './types'
+ import { processHeaders } from './helpers/headers'
+ import { transformRequest, transformResponse } from './helpers/data'
 
  const defaults: AxiosRequestConfig = {
    method: 'get',
@@ -14,7 +16,20 @@
      common: {
        Accept: 'application/json, text/plain, */*'
      }
-   }
+   },
+   // 请求数据默认处理逻辑
+   transformRequest: [
+     function(data: any, headers: any): any {
+       processHeaders(headers, data)
+       return transformRequest(data)
+     }
+   ],
+   // 响应数据默认处理逻辑
+   transformResponse: [
+     function(data: any): any {
+       return transformResponse(data)
+     }
+   ]
  }
 
  // 这些请求是没有携带 data 数据的

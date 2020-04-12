@@ -21,11 +21,16 @@ interface PromiseChain<T> {
 }
 
 export default class Axios {
-
+  // 默认配置
   defaults: AxiosRequestConfig
-
+  // 拦截器
   interceptors: Interceptors
 
+  /**
+   * 实例化 Axios，设置默认配置和拦截器
+   * @param {AxiosRequestConfig} initConfig
+   * @memberof Axios
+   */
   constructor(initConfig: AxiosRequestConfig) {
     this.defaults = initConfig
     this.interceptors = {
