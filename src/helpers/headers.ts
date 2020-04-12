@@ -4,7 +4,8 @@
  * @Author: HJ <jinhuang02@hand-china.com>
  * @Copyright: Copyright (c) 2018, Hand
  */
-import { isPlainObject } from './util'
+import { isPlainObject, deepMerge } from './util'
+import { Method } from '../types'
 
 // headers name 规范化，避免大小写问题导致错误
 function normalizeHeaderName(headers: any, normalizedName: string): void{
@@ -48,4 +49,31 @@ export function parseHeaders(headers: string): any {
   })
 
   return parsed
+}
+
+
+
+
+/**
+ *  打平 headers 的内部各种属性，都放在最外层，然后删除
+ *
+ * @export
+ * @param {*} headers
+ * @param {Method} method
+ * @returns {*}
+ */
+export function flattenHeaders(headers: any, method: Method): any {
+  if (!headers) {
+    return headers
+  }
+
+  headers = deepMerge(headers.common, headers[method], headers)
+
+  const methodsToDelelte = ['delete', 'get', 'head', 'options', 'post', 'put', 'patch', 'common']
+
+  methodsToDelelte.forEach(method => {
+    delete headers[method]
+  })
+
+  return headers
 }

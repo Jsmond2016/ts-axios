@@ -30,3 +30,35 @@ export function extend<T, U>(to: T, from: U): T & U {
   return to as T & U
 }
 
+
+
+/**
+ *  深度 合并配置，类似深拷贝，这里只考虑参数为对象的情况
+ *
+ * @export
+ * @param {...any[]} objs
+ * @returns {*}
+ */
+export function deepMerge(...objs: any[]): any {
+  const result = Object.create(null)
+
+  objs.forEach(obj => {
+    if (obj) {
+      Object.keys(obj).forEach(key => {
+        const val = obj[key]
+        // 递归，若值依然是一个对象，则需要再次遍历，直到最后只为一个值
+        if (isPlainObject(val)) {
+          if (isPlainObject(result[key])) {
+            result[key] = deepMerge(result[key], val)
+          } else {
+            result[key] = deepMerge(val)
+          }
+        } else {
+          result[key] = val
+        }
+      })
+    }
+  })
+
+  return result
+}
