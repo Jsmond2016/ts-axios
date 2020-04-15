@@ -25,7 +25,8 @@ export interface AxiosRequestConfig{
   [propName: string]: any,
   transformRequest?: AxiosTransformer | AxiosTransformer[],
   transformResponse?: AxiosTransformer | AxiosTransformer[]
-  cancelToken?: CancelToken
+  cancelToken?: CancelToken,
+  withCredentials?: boolean // 跨域处理
 }
 
 export interface AxiosResponse<T = any> {

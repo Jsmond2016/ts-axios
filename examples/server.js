@@ -7,10 +7,13 @@
 
 const express = require('express')
 const bodyParser = require('body-parser')
+const cookieParse = require('cookie-parser')
 const webpack = require('webpack')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const WebpackConfig = require('./webpack.config')
+
+require('./server2')
 
 const app = express()
 const compiler = webpack(WebpackConfig)
@@ -19,6 +22,7 @@ app.use(webpackHotMiddleware(compiler))
 app.use(express.static(__dirname))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cookieParse()) // cookie 读取中间件，使用后方可读取 req.cookies
 app.use(webpackDevMiddleware(compiler, {
   publicPath: '/__build__/',
   stats: {
@@ -38,6 +42,7 @@ registerExtendRouter()
 registerInterceptorRouter()
 registerConfigRouter()
 registerCancelRouter()
+registerMoreRouter()
 
 
 function registerSimpleRouter() {
@@ -150,6 +155,12 @@ function registerCancelRouter() {
     setTimeout(() => {
       res.json(req.body)
     }, 1000)
+  })
+}
+
+function registerMoreRouter() {
+  router.get('/more/get', function (req, res) {
+    res.json(req.cookies) // 设置了 cookie-parser 后才可以读取到
   })
 }
 

@@ -102,6 +102,7 @@
     "lodash.camelcase": "^4.3.0",
     "prettier": "^1.14.3",
     "prompt": "^1.0.0",
+    "qs": "^6.9.3",
     "replace-in-file": "^3.4.2",
     "rimraf": "^2.6.2",
     "rollup": "^0.67.0",
@@ -124,7 +125,9 @@
     "typescript": "^3.0.3",
     "webpack": "^4.28.4",
     "webpack-dev-middleware": "^3.5.0",
-    "webpack-hot-middleware": "^2.24.3",
-    "qs": "^6.9.3"
+    "webpack-hot-middleware": "^2.24.3"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.5"
   }
 }
