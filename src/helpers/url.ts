@@ -4,7 +4,7 @@
  * @Author: HJ <jinhuang02@hand-china.com>
  * @Copyright: Copyright (c) 2018, Hand
  */
-import { isDate, isPlainObject } from './util'
+import { isDate, isPlainObject, isURLSearchParams } from './util'
 
 // 字符串作为 URI 组件进行编码，示例如下：
 // document.write(encodeURIComponent("http://www.w3school.com.cn"))
@@ -21,37 +21,49 @@ function encode (val: string): string {
 }
 
 // 将请求的数据转换成 请求 url，拼接拼接
-export function buildURL (url: string, params?: any) {
+export function buildURL (
+  url: string,
+  params?: any,
+  paramsSerializer?: (params: any) => string
+  ) {
   if (!params) {
     return url
   }
 
-  const parts: string[] = []
+  let serializedParams
 
-  Object.keys(params).forEach((key) => {
-    let val = params[key]
-    if (val === null || typeof val === 'undefined') {
-      return
-    }
-    let values: string[]
-    if (Array.isArray(val)) {
-      values = val
-      key += '[]'
-    } else {
-      values = [val]
-    }
-    values.forEach((val) => {
-      if (isDate(val)) {
-        // 使用 ISO 标准返回字符串的日期格式,格式为: YYYY-MM-DDTHH:mm:ss.sssZ
-        val = val.toISOString()
-      } else if (isPlainObject(val)) {
-        val = JSON.stringify(val)
+  if (paramsSerializer) {
+    serializedParams = paramsSerializer(params)
+  } else if (isURLSearchParams(params)) {
+    serializedParams = params.toString()
+  } else {
+    const parts: string[] = []
+
+    Object.keys(params).forEach((key) => {
+      let val = params[key]
+      if (val === null || typeof val === 'undefined') {
+        return
       }
-      parts.push(`${encode(key)}=${encode(val)}`)
+      let values: string[]
+      if (Array.isArray(val)) {
+        values = val
+        key += '[]'
+      } else {
+        values = [val]
+      }
+      values.forEach((val) => {
+        if (isDate(val)) {
+          // 使用 ISO 标准返回字符串的日期格式,格式为: YYYY-MM-DDTHH:mm:ss.sssZ
+          val = val.toISOString()
+        } else if (isPlainObject(val)) {
+          val = JSON.stringify(val)
+        }
+        parts.push(`${encode(key)}=${encode(val)}`)
+      })
     })
-  })
+    serializedParams = parts.join('&')
+  }
 
-  let serializedParams = parts.join('&')
 
   if (serializedParams) {
     const markIndex = url.indexOf('#')
