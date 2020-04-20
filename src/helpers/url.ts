@@ -113,3 +113,13 @@ function resolveURL(url: string): URLOrigin {
     host
   }
 }
+
+// baseURL 辅助函数
+export function isAbsoluteURL(url: string): boolean {
+  return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url)
+}
+
+// baseURL 辅助函数
+export function combineURL(baseURL: string, relativeURL?: string): string {
+  return relativeURL ? baseURL.replace(/\/+$/, '') + '/' + relativeURL.replace(/^\/+/, '') : baseURL
+}
