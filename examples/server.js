@@ -62,7 +62,7 @@ registerMoreRouter()
 uploadAndDownloadRouter()
 registerAuthRouter()
 registerStatusRouter()
-
+registerStaticRouter()
 
 function registerSimpleRouter() {
   router.get('/simple/get', function(req, res) {
@@ -208,6 +208,15 @@ function registerStatusRouter() {
   router.get('/more/304', function(req, res) {
     res.status(304)
     res.end()
+  })
+}
+
+function registerStaticRouter() {
+  router.get('/more/A', (req, res) => {
+    res.end('A')
+  })
+  router.get('/more/B', (req, res) => {
+    res.end('B')
   })
 }
 

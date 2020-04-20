@@ -18,6 +18,10 @@ export interface AxiosBasicCredentials {
   password: string
 }
 
+export interface AxiosClassStatic {
+  new (config: AxiosRequestConfig): Axios
+}
+
 export interface AxiosRequestConfig{
   url?: string,
   method?: Method,
@@ -84,6 +88,9 @@ export interface Axios {
   put<T = any>(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise<T>
 
   patch<T = any>(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise<T>
+
+  getUri(config?: AxiosRequestConfig): string
+
 }
 
 export interface AxiosInstance extends Axios {
@@ -118,6 +125,12 @@ export interface AxiosStatic extends AxiosInstance {
   CancelToken: CancelTokenStatic
   Cancel: CancelStatic
   isCancel: (val: any) => boolean
+  
+  all<T>(promises: Array<T | Promise<T>>): Promise<T[]>
+
+  spread<T, R>(callback: (...args: T[]) => R): (arr: T[]) => R
+
+  Axios: AxiosClassStatic
 }
 
 // 取消请求

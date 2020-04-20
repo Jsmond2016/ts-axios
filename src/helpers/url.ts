@@ -114,12 +114,12 @@ function resolveURL(url: string): URLOrigin {
   }
 }
 
-// baseURL 辅助函数
+// baseURL 辅助函数--判断是否为绝对路径
 export function isAbsoluteURL(url: string): boolean {
   return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url)
 }
 
-// baseURL 辅助函数
+// baseURL 辅助函数-- 字符串拼接
 export function combineURL(baseURL: string, relativeURL?: string): string {
   return relativeURL ? baseURL.replace(/\/+$/, '') + '/' + relativeURL.replace(/^\/+/, '') : baseURL
 }
