@@ -13,6 +13,10 @@ export type Method = 'get' | 'GET'
   | 'put' | 'PUT'
   | 'patch' | 'PATCH'
 
+export interface AxiosBasicCredentials {
+  username: string
+  password: string
+}
 
 export interface AxiosRequestConfig{
   url?: string,
@@ -31,6 +35,7 @@ export interface AxiosRequestConfig{
   xsrfHeaderName?: string  // 防止 sxrf 攻击
   onDownloadProgress?: (e: ProgressEvent) => void
   onUploadProgress?: (e: ProgressEvent) => void
+  auth?: AxiosBasicCredentials
 }
 
 export interface AxiosResponse<T = any> {
