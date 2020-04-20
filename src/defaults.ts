@@ -17,6 +17,9 @@
        Accept: 'application/json, text/plain, */*'
      }
    },
+   xsrfCookieName: 'XSRF-TOKEN',
+   xsrfHeaderName: 'X-XSRF-TOKEN',
+
    // 请求数据默认处理逻辑
    transformRequest: [
      function(data: any, headers: any): any {

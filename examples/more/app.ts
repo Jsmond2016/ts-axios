@@ -20,3 +20,15 @@ axios.post('http://localhost:8088/more/server2', { }, {
 }).then(res => {
   console.log(res)
 })
+
+
+// 验证同源
+const instance = axios.create({
+  xsrfCookieName: 'XSRF-TOKEN-D',
+  xsrfHeaderName: 'X-XSRF-TOKEN-D'
+})
+
+// tslint:disable-next-line: no-floating-promises
+instance.get('/more/get').then(res => {
+  console.log('xsrf demo: ', res)
+})

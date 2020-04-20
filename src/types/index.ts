@@ -27,6 +27,8 @@ export interface AxiosRequestConfig{
   transformResponse?: AxiosTransformer | AxiosTransformer[]
   cancelToken?: CancelToken,
   withCredentials?: boolean // 跨域处理
+  xsrfCookieName?: string  // 防止 sxrf 攻击
+  xsrfHeaderName?: string  // 防止 sxrf 攻击
 }
 
 export interface AxiosResponse<T = any> {
