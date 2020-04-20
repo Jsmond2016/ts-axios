@@ -19,6 +19,9 @@
    },
    xsrfCookieName: 'XSRF-TOKEN',
    xsrfHeaderName: 'X-XSRF-TOKEN',
+   validateStatus(status: number): boolean {
+      return status >= 200 && status < 300
+    },
 
    // 请求数据默认处理逻辑
    transformRequest: [

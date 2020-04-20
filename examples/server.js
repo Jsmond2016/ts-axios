@@ -61,6 +61,7 @@ registerCancelRouter()
 registerMoreRouter()
 uploadAndDownloadRouter()
 registerAuthRouter()
+registerStatusRouter()
 
 
 function registerSimpleRouter() {
@@ -200,6 +201,13 @@ function registerAuthRouter() {
     } else {
       res.end('UnAuthorization')
     }
+  })
+}
+
+function registerStatusRouter() {
+  router.get('/more/304', function(req, res) {
+    res.status(304)
+    res.end()
   })
 }
 
