@@ -12,6 +12,8 @@ const webpack = require('webpack')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const WebpackConfig = require('./webpack.config')
+const multipart = require('connect-multiparty')
+const path = require('path')
 
 require('./server2')
 
@@ -39,15 +41,13 @@ app.use(express.static(__dirname, {
   }
 }))
 
+// 上传下载
+app.use(multipart({
+  uploadDir: path.resolve(__dirname, 'upload-file')
+}))
 
 
 const router = express.Router()
-app.use(router)
-
-const port = process.env.PORT || 8080
-module.exports = app.listen(port, () => {
-  console.log(`Server listening on http://localhost:${port}, Ctrl+C to stop`)
-})
 
 
 registerSimpleRouter()
@@ -58,7 +58,7 @@ registerInterceptorRouter()
 registerConfigRouter()
 registerCancelRouter()
 registerMoreRouter()
-
+uploadAndDownloadRouter()
 
 function registerSimpleRouter() {
   router.get('/simple/get', function(req, res) {
@@ -178,5 +178,20 @@ function registerMoreRouter() {
     res.json(req.cookies) // 设置了 cookie-parser 后才可以读取到
   })
 }
+
+function uploadAndDownloadRouter() {
+  router.post('/more/upload', function(req, res) {
+    console.log(req.body, req.files)
+    res.end('upload success!')
+  })
+}
+
+app.use(router)
+
+const port = process.env.PORT || 8080
+module.exports = app.listen(port, () => {
+  console.log(`Server listening on http://localhost:${port}, Ctrl+C to stop`)
+})
+
 
 

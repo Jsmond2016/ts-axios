@@ -29,6 +29,8 @@ export interface AxiosRequestConfig{
   withCredentials?: boolean // 跨域处理
   xsrfCookieName?: string  // 防止 sxrf 攻击
   xsrfHeaderName?: string  // 防止 sxrf 攻击
+  onDownloadProgress?: (e: ProgressEvent) => void
+  onUploadProgress?: (e: ProgressEvent) => void
 }
 
 export interface AxiosResponse<T = any> {
