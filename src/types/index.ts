@@ -23,17 +23,17 @@ export interface AxiosClassStatic {
 }
 
 export interface AxiosRequestConfig{
-  url?: string,
-  method?: Method,
-  data?: any,
-  params?: any,
-  headers?: any,
-  responseType?: XMLHttpRequestResponseType,
-  timeout?: number,
-  [propName: string]: any,
-  transformRequest?: AxiosTransformer | AxiosTransformer[],
+  url?: string
+  method?: Method
+  data?: any
+  params?: any
+  headers?: any
+  responseType?: XMLHttpRequestResponseType
+  timeout?: number
+  [propName: string]: any
+  transformRequest?: AxiosTransformer | AxiosTransformer[]
   transformResponse?: AxiosTransformer | AxiosTransformer[]
-  cancelToken?: CancelToken,
+  cancelToken?: CancelToken
   withCredentials?: boolean // 跨域处理
   xsrfCookieName?: string  // 防止 sxrf 攻击
   xsrfHeaderName?: string  // 防止 sxrf 攻击
@@ -46,20 +46,20 @@ export interface AxiosRequestConfig{
 }
 
 export interface AxiosResponse<T = any> {
-  data: T,
-  status: number,
-  statusText: string,
-  headers: any,
-  config: AxiosRequestConfig,
-  request: any,
+  data: T
+  status: number
+  statusText: string
+  headers: any
+  config: AxiosRequestConfig
+  request: any
 }
 
 export interface AxiosError extends Error{
-  isAxiosError: boolean,
-  config: AxiosRequestConfig,
-  code?: string | null,
-  request?: any,
-  response?: AxiosResponse,
+  isAxiosError: boolean
+  config: AxiosRequestConfig
+  code?: string | null
+  request?: any
+  response?: AxiosResponse
 }
 
 export interface AxiosPromise<T = any > extends Promise<AxiosResponse<T>> {}
@@ -69,7 +69,7 @@ export interface Axios {
   defaults: AxiosRequestConfig
 
   interceptors: {
-    request: AxiosInterceptorManager<AxiosRequestConfig>,
+    request: AxiosInterceptorManager<AxiosRequestConfig>
     response: AxiosInterceptorManager<AxiosResponse> 
   }
 
@@ -116,7 +116,7 @@ export interface RejectedFn {
 }
 
 export interface AxiosTransformer{
-  (data: any, headers: any): any
+  (data: any, headers?: any): any
 }
 
 // 扩展 axios.create 静态接口
@@ -145,7 +145,7 @@ export interface Canceler {
   (message?: string): void
 }
 
-export interface CancelExcecutor {
+export interface CancelExecutor {
   (cancel: Canceler): void
 }
 
@@ -155,7 +155,7 @@ export interface CancelTokenSource{
 }
 
 export interface CancelTokenStatic {
-  new(executor: CancelExcecutor): CancelToken
+  new(executor: CancelExecutor): CancelToken
 
   source(): CancelTokenSource
 }

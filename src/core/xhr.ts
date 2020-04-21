@@ -17,8 +17,8 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
     const {
       data = null,
       url,
-      method = 'get',
-      headers,
+      method,
+      headers = {},
       responseType,
       timeout,
       cancelToken,
@@ -33,7 +33,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
 
     const request = new XMLHttpRequest()
 
-    request.open(method.toUpperCase(), url!, true)
+    request.open(method!.toUpperCase(), url!, true)
 
     configureRequest()
 
@@ -53,7 +53,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
      *
      * @param {AxiosResponse} response
      */
-    function handleResponse(response: AxiosResponse) {
+    function handleResponse(response: AxiosResponse): void {
       // status 状态码含义参考 https://www.cnblogs.com/lzy666/p/7157897.html
       if (!validateStatus || validateStatus(response.status)) {
         resolve(response)
@@ -194,6 +194,12 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
           request.abort()
           reject(reason)
         })
+	      .catch(
+            /* istanbul ignore next */
+            () => {
+              // do nothing
+            }
+          )
       }
     }
   })

@@ -25,7 +25,7 @@ export function buildURL (
   url: string,
   params?: any,
   paramsSerializer?: (params: any) => string
-  ) {
+  ): string {
   if (!params) {
     return url
   }
@@ -40,7 +40,7 @@ export function buildURL (
     const parts: string[] = []
 
     Object.keys(params).forEach((key) => {
-      let val = params[key]
+      const val = params[key]
       if (val === null || typeof val === 'undefined') {
         return
       }

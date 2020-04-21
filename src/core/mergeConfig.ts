@@ -56,7 +56,7 @@ function deepMergeStrat(val1: any, val2: any): any {
     return val2
   } else if (isPlainObject(val1)) {
     return deepMerge(val1)
-  } else if (typeof val1 !== 'undefined') {
+  } else {
     return val1
   }
 }
@@ -93,7 +93,7 @@ stratKeysDeepMerge.forEach(key => {
    }
 
    // 使用了设计模式——策略模式
-   function mergeField(key: string) {
+   function mergeField(key: string): void {
     const strat = strats[key] || defaultStrat
     config[key] = strat(config1[key], config2![key]) // 虽然上面定义了 config2 为空对象，但是这里因为在函数内，无法判断类型，需要断言为 !
    }

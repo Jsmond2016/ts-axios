@@ -30,7 +30,7 @@ export function transformResponse (data: any): any {
       data = JSON.parse(data)
     } catch (e) {
       // 表示响应数据不是字符串
-      console.log('响应数据不是字符串')
+      console.log('Network Error')
     }
   }
   return data

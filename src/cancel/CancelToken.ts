@@ -5,7 +5,7 @@
  * @Copyright: Copyright (c) 2018, Hand
  */
 
-import { CancelExcecutor, CancelTokenSource, Canceler } from '../types'
+import { CancelExecutor, CancelTokenSource, Canceler } from '../types'
 import Cancel from './Cancel'
 
 
@@ -18,7 +18,7 @@ interface ResolvePromise {
    promise: Promise<Cancel>
    reason?: Cancel
 
-   constructor(executor: CancelExcecutor) {
+   constructor(executor: CancelExecutor) {
     let resolvePromise: ResolvePromise
     // 抽离 pending 状态的 promise，实现异步分离
     this.promise =  new Promise<Cancel>(resolve => {
@@ -32,7 +32,7 @@ interface ResolvePromise {
     })
   }
 
-  throwIfRequested() {
+  throwIfRequested(): void {
     if (this.reason) {
       throw this.reason
     }

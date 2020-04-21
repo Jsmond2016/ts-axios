@@ -51,6 +51,8 @@ export default class Axios {
 
     config = mergeConfig(this.defaults, config)
 
+    config.method = config.method.toLowerCase()
+
     const chain: PromiseChain<any>[] = [{
       resolved: dispatchRequest,
       rejected: undefined
@@ -108,7 +110,11 @@ export default class Axios {
     return transformURL(config)
   }
 
-  _requestMethodWithoutData(method: Method, url: string, config?: AxiosRequestConfig) {
+  _requestMethodWithoutData(
+    method: Method, 
+    url: string, 
+    config?: AxiosRequestConfig
+    ): AxiosPromise {
     return this.request(
       Object.assign(config || {}, {
         method,
@@ -117,7 +123,12 @@ export default class Axios {
     )
   }
 
-  _requestMethodWithData(method: Method, url: string, data?: any, config?: AxiosRequestConfig) {
+  _requestMethodWithData(
+    method: Method, 
+    url: string, 
+    data?: any, 
+    config?: AxiosRequestConfig
+    ): AxiosPromise {
     return this.request(
       Object.assign(config || {}, {
         method,

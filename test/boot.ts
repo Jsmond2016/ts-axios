@@ -4,3 +4,9 @@
  * @Author: HJ <jinhuang02@hand-china.com>
  * @Copyright: Copyright (c) 2018, Hand
  */
+const JasmineCore = require('jasmine-core')
+// @ts-ignore
+global.getJasmineRequireObj = function() {
+  return JasmineCore
+}
+require('jasmine-ajax')
