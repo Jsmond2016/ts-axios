@@ -1,30 +1,25 @@
-# 学习参考：
+# ts-axios-doc
 
-- [基于TypeScript从零重构axios](https://coding.imooc.com/class/330.html)
-- [ts-axios](https://github.com/yishibakaien/ts-axios)
+TypeScript 从零实现 axios 文档教材
 
-## 项目介绍
+## 启动电子书
 
-用 typescript 实现 axios 浏览器部分，完善的 demo 与单元测试
+首先 clone 本项目：
 
+```bash
+git clone https://git.imooc.com/coding-330/ts-axios-doc.git
+```
 
-## ts-axios
+进入 `ts-axios-doc` 目录后安装项目依赖：
 
-- 采用 Promise API
-- 请求和响应配置化
-- 支持请求和响应数据自定义拦截器
-- 支持外部取消请求
-- 支持跨域请求携带 cookie
-- 支持客户端 XSRF 防御
-- 支持 upload/download 进度监控
-- 支持 http authorization
-- 自定义合法状态码
-- 自定义参数序列化
-- 支持配置 baseURL
-- axios.all axios.spread axios.getUri
+```bash
+npm install
+```
 
-所有 axios 官方库浏览器端功能已实现
+安装依赖后运行电子书：
 
-## 单元测试
+```bash
+npm run dev
+```
 
-所有模块单元测试编写完毕且通过
+浏览器打开 `http://localhost:8080/ts-axios/` 即可。
