@@ -8,6 +8,13 @@
 
 import { isPlainObject } from './util'
 
+/**
+ *  将请求序列化
+ *
+ * @export
+ * @param {*} data
+ * @returns {*}
+ */
 export function transformRequest (data: any): any {
   if (isPlainObject(data)) {
     return JSON.stringify(data)
@@ -15,7 +22,7 @@ export function transformRequest (data: any): any {
   return data
 }
 
-// 当相应数据为字符串时，转换成 json 对象
+// 当响应数据为字符串时，转换成 json 对象
 export function transformResponse (data: any): any {
   if (typeof data === 'string') {
     try {
